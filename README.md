@@ -16,7 +16,7 @@ A web application that allows users to convert PowerPoint (.pptx) files to PDF f
 1. Clone the repository:
 ```bash
 git clone [<repository-url>](https://github.com/dawooddilawar/slidespeak-coding-challenge-2025.git)
-cd slidespeak-challenge
+cd slidespeak-coding-challenge-2025
 ```
 
 2. Set up environment variables:
