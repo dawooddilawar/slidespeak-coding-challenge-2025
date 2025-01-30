@@ -1,0 +1,62 @@
+services:
+  frontend:
+    container_name: slidespeak-frontend
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+
+  backend:
+    container_name: slidespeak-backend
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - UNOSERVER_HOST=slidespeak-unoserver
+      - UNOSERVER_PORT=2004
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - S3_BUCKET=${S3_BUCKET}
+    volumes:
+      - ./backend:/app
+      - temp_files:/app/temp
+    depends_on:
+      unoserver:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  unoserver:
+    container_name: slidespeak-unoserver
+    image: libreofficedocker/libreoffice-unoserver:3.19-9c28c22
+    expose:
+      - "2002"
+      - "2004"
+    volumes:
+      - temp_files:/app/temp
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "2004" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+volumes:
+  temp_files:
+
+networks:
+  app-network:
+    driver: bridge

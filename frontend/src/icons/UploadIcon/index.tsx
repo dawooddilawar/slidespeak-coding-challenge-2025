@@ -1,13 +1,11 @@
 const UploadIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M17.5 12.5V13.5C17.5 14.9001 17.5 15.6002 17.2275 16.135C16.9878 16.6054 16.6054 16.9878 16.135 17.2275C15.6002 17.5 14.9001 17.5 13.5 17.5H6.5C5.09987 17.5 4.3998 17.5 3.86502 17.2275C3.39462 16.9878 3.01217 16.6054 2.77248 16.135C2.5 15.6002 2.5 14.9001 2.5 13.5V12.5M14.1667 6.66667L10 2.5M10 2.5L5.83333 6.66667M10 2.5V12.5"
-      stroke="currentColor"
-      strokeWidth="1.66667"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="64" height="64" rx="32" fill="#EAECF0"/>
+        <rect x="4" y="4" width="64" height="64" rx="32" stroke="#F2F4F7" strokeWidth="8"/>
+        <path
+            d="M25.3333 41.6563C23.7253 40.58 22.6666 38.7469 22.6666 36.6667C22.6666 33.5419 25.0553 30.9751 28.1063 30.6925C28.7304 26.8962 32.027 24 36 24C39.973 24 43.2695 26.8962 43.8936 30.6925C46.9446 30.9751 49.3333 33.5419 49.3333 36.6667C49.3333 38.7469 48.2746 40.58 46.6666 41.6563M30.6666 41.3333L36 36M36 36L41.3333 41.3333M36 36V48"
+            stroke="#1D2939" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
 );
 
 export default UploadIcon;

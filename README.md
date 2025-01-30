@@ -1,57 +1,64 @@
-# SlideSpeak coding challenge: Build a PowerPoint to PDF marketing tool
+# SlideSpeak - PowerPoint to PDF Converter
 
-## The challenge!
+A web application that allows users to convert PowerPoint (.pptx) files to PDF format easily and efficiently.
 
-Build a front-end implementation as well as a back-end service to convert PowerPoint documents to PDF format. This
-should be done by implementing a simple **Next.js** front-end that posts a file to a **Python** server. You don’t have
-to do the converting logic yourself as you can use unoconv or unoserver to do this (you can see more about this in the
-acceptance criteria). The front-end is also already implemented in the /frontend folder. You only need to add the
-necessary logic to switch between the steps and convert the file via the API that you're going to build.
+## Prerequisites
 
-- Design: [https://www.figma.com/file/CRfT0MVMqIV8rAK6HgSnKA/SlideSpeak-Coding-Challenge?type=design&t=6m2fFDaRs72CowZH-6](https://www.figma.com/file/CRfT0MVMqIV8rAK6HgSnKA/SlideSpeak-Coding-Challenge?type=design&t=6m2fFDaRs72CowZH-6)
+- Docker and Docker Compose
+- AWS Account with:
+  - Access Key ID
+  - Secret Access Key
+  - S3 Bucket created
+  - Appropriate S3 permissions
 
-## Acceptance criteria
+## Quick Start
 
-### Back-end API
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd slidespeak-challenge
+```
 
-- Should be implemented in Python.
-- Converting PowerPoints to PDF can be done with `unoconv` or `unoserver` via Docker if you want to be fancy 😀. You
-  don’t need to implement the converting logic yourself.
-  - [How to use unoserver via docker](https://gist.github.com/kgoedecke/44955d0b0b1ed4112bcfd3e237e135c0), this will
-    create an API that you can use based on [this](https://github.com/libreofficedocker/unoserver-rest-api)
-    documentation.
-    - Using unoserver is nice-to-have (but the preferred way), if you find unoconv easier use it instead
-- Under the the hood the API:
+2. Set up environment variables:
+```bash
+cp .env.example .env
+```
 
-  1. Convert the attached file to PDF
-  2. Upload the PowerPoint and PDF file to Amazon S3
-     via [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-  3. Create a presigned URL for the user to download
+3. Copy and rename `.env.example` to `.env` and update the file with your AWS credentials:
 
-     [https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-presigned-urls.html](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-presigned-urls.html)
+```env
+AWS_ACCESS_KEY_ID=your_access_key_id
+AWS_SECRET_ACCESS_KEY=your_secret_access_key
+AWS_REGION=your_aws_region
+S3_BUCKET=your_s3_bucket_name
+UNOSERVER_PORT=2002
+UNOSERVER_HOST=slidespeak-unoserver
+```
 
-     [https://medium.com/@aidan.hallett/securing-aws-s3-uploads-using-presigned-urls-aa821c13ae8d](https://medium.com/@aidan.hallett/securing-aws-s3-uploads-using-presigned-urls-aa821c13ae8d)
+4. Start the application:
+Make sure that you have Docker and Docker Compose installed, and that you are in the root directory of the project.
+Run the following command to build and start the application:
+```bash
+docker compose up --build
+```
 
-  4. Return the presigned S3 url to the client which allows the user to download the file (by opening the url in new
-     tab)
+## Accessing the Application
 
-- Queuing to process multiple requests at a time
+- Frontend: http://localhost:3000
+- Backend API & Documentation: http://localhost:8000/docs
 
-### Front-end app
+## API Endpoints
 
-- The front-end should in terms of UX work similarly
-  to [https://app.slidespeak.co/powerpoint-optimizer](https://app.slidespeak.co/powerpoint-optimizer)
+The main endpoints are:
 
-## General Requirements:
+- `POST /api/convert` - Upload and convert PPTX file
+- `GET /api/status/{task_id}` - Check conversion status
 
-- Use conventional commit message style: https://www.conventionalcommits.org/en/v1.0.0/
-- Lint your code
-- Keep commits clean
+For detailed API documentation and testing, visit http://localhost:8000/docs after starting the application.
 
-## Nice to haves / tips
+## Stopping the Application
 
-- Uses unoserver to convert PowerPoint to PDF via docker compose
-- The logic of the front-end ideally should not rely on useEffect too much since it can be difficult to track what is
-  happening
-- Tests
-- API documentation
+To stop the application and remove containers:
+```bash
+docker compose down
+```

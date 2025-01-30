@@ -1,0 +1,12 @@
+aioboto3==13.4.0
+fastapi==0.115.7
+pydantic==2.10.6
+pydantic-settings==2.7.1
+pydantic_core==2.27.2
+python-dotenv==1.0.1
+python-multipart==0.0.20
+s3transfer==0.11.2
+unoserver==3.1
+urllib3==2.3.0
+uvicorn==0.34.0
+httpx==0.28.1
