@@ -12,7 +12,7 @@ export function Card({ children, className }: CardProps) {
     return (
         <div
             className={cn(
-                'w-[416px] h-[276px] bg-white rounded-xl shadow-sm',
+                'bg-white rounded-xl shadow-sm',
                 className
             )}
         >

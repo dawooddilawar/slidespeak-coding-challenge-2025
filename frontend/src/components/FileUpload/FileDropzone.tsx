@@ -20,7 +20,7 @@ export function FileDropzone({ onDrop }: FileDropzoneProps) {
     return (
         <div
             {...getRootProps()}
-            className="w-full h-full border-2 border-dashed rounded-xl p-6 text-center cursor-pointer border-gray-300 hover:border-gray-400 flex flex-col items-center justify-center"
+            className="w-full h-full border-2 border-dashed rounded-xl px-6 py-14 text-center cursor-pointer border-gray-300 hover:border-gray-400 flex flex-col items-center justify-center"
         >
             <input {...getInputProps()} />
             <div className="mb-4">
